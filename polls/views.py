@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import Http404
 
 from .models import Question
 
@@ -11,7 +12,13 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 def detail(request, question_id):
-    return HttpResponse('You are looking at question %s.' %question_id)
+    try:
+        question = Question.objects.get(pk=question_id)
+    except:
+        raise Http404('Question doesn\'t exist!')
+
+    context = { 'question': question }
+    return render(request, 'polls/detail.html', context)
 
 def results(request, question_id):
     result = "You're looking at the results of question %s."
