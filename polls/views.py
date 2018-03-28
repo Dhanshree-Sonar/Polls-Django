@@ -22,8 +22,9 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', context)
 
 def results(request, question_id):
-    result = "You're looking at the results of question %s."
-    return HttpResponse(result %question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    context = { 'question': question }
+    return render(request, 'polls/results.html', context)
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -35,7 +36,7 @@ def vote(request, question_id):
             'question': question,
             'error_message': 'You didn\'t select a choice.',
         }
-        return render(request, 'polls:detail.html', context)
+        return render(request, 'polls/detail.html', context)
     else:
         selected_choice.votes += 1
         selected_choice.save()
