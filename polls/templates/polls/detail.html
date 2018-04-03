@@ -4,21 +4,32 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Detail</title>
   </head>
   <body>
-    <h2>{{ question.question_text }}</h2>
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <div class="w3-center w3-jumbo w3-text-pink">
+      Polls
+    </div>
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-      {% csrf_token %}
-      {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-      {% endfor %}
-      <input type="submit" value="Vote" />
-    </form>
+    <div class="w3-card-4 w3-margin w3-padding w3-large w3-text-pink">
+      <h2 class="w3-margin">{{ question.question_text }}</h2>
+
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+      <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <div class="w3-margin">
+        {% for choice in question.choice_set.all %}
+          <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+          <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+        {% endfor %}
+        </div>
+        <input type="submit" value="Vote"
+        class="w3-margin"/>
+      </form>
+    </div>
 
   </body>
 </html>
