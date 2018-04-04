@@ -13,12 +13,12 @@
     </div>
 
     <div class="w3-card-4 w3-margin w3-padding w3-large w3-text-pink">
-      <h1>{{ question.question_text }}</h1>
-      <ul>
+      <h1 class="w3-margin">{{ question.question_text }}</h1>
+      <div class="w3-margin">
         {% for choice in question.choice_set.all %}
-          <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+          {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
         {% endfor %}
-      </ul>
+      </div>
       <a href="{% url 'polls:detail' question.id %}"> Vote again?</a>
     </div>
   </body>
