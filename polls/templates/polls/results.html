@@ -4,15 +4,22 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Results</title>
   </head>
   <body>
-    <h1>{{ question.question_text }}</h1>
-    <ul>
-      {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-      {% endfor %}
-    </ul>
-    <a href="{% url 'polls:detail' question.id %}"> Vote again?</a>
+    <div class="w3-center w3-jumbo w3-text-pink">
+      Polls
+    </div>
+
+    <div class="w3-card-4 w3-margin w3-padding w3-large w3-text-pink">
+      <h1>{{ question.question_text }}</h1>
+      <ul>
+        {% for choice in question.choice_set.all %}
+          <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'polls:detail' question.id %}"> Vote again?</a>
+    </div>
   </body>
 </html>
